@@ -1,0 +1,6 @@
+termcolor
+
+colorama
+
+requests
+
