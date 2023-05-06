@@ -27,7 +27,7 @@ This will delete the project located at /path/to/project.
 # --add
 To add a dependency to a project, you can use the --add flag followed by the directory of the project, the location of the dependency, and the name of the dependency:
 
-python willow.py --add /path/to/project --location /path/to/dependency --depname mydependency
+python willow.py --add GITHUB-URL --location /path/to/dependency --depname mydependency
 This will add the mydependency dependency located at /path/to/dependency to the project located at /path/to/project.
 
 # --version
