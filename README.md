@@ -15,19 +15,19 @@ This will create a new project called myproject in the /path/to/project director
 # --compile
 To compile a project, you can use the --compile flag followed by the directory of the project that should be compiled:
 
-python willow.py --compile /path/to/project
+willow --compile /path/to/project
 This will compile the project located at /path/to/project.
 
 # --delete
 To delete a project, you can use the --delete flag followed by the directory of the project that should be deleted:
 
-python willow.py --delete /path/to/project
+willow --delete /path/to/project
 This will delete the project located at /path/to/project.
 
 # --add
 To add a dependency to a project, you can use the --add flag followed by the directory of the project, the location of the dependency, and the name of the dependency:
 
-python willow.py --add GITHUB-URL --location /path/to/dependency --depname mydependency
+willow --add GITHUB-URL --location /path/to/dependency --depname mydependency
 This will add the mydependency dependency located at /path/to/dependency to the project located at /path/to/project.
 
 # --version
