@@ -18,7 +18,7 @@ To compile a project, you can use the --compile flag followed by the directory o
 python willow.py --compile /path/to/project
 This will compile the project located at /path/to/project.
 
---delete
+# --delete
 To delete a project, you can use the --delete flag followed by the directory of the project that should be deleted:
 
 python willow.py --delete /path/to/project
@@ -33,8 +33,14 @@ This will add the mydependency dependency located at /path/to/dependency to the 
 # --version
 To get the current version of Willow, you can use the --version flag:
 
-python willow.py --version
+willow --version
 This will print the current version of Willow to the console.
+
+# --scan
+To scan a project for any dependencies that does not come with python, use the --scan flag:
+willow --scan project-name
+This will return a list of things and add it to a file located in project-name/willow/build-dependencies/
+Files with syntax errors are not included and give an error.
 
 # API
 Willow also provides an API that can be used to perform the same tasks programmatically. The willowapi module provides the following functions:

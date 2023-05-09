@@ -18,7 +18,7 @@ import time
 
 import requests
 
-import wget
+import ast
 
 #########################
 
@@ -27,6 +27,9 @@ dt = datetime.datetime.now()
 
 
 ###### Log4py (lpy)
+
+# Important lines:
+# Line 202 (Version changing)
 
 init(strip=False)
 
@@ -88,7 +91,11 @@ def create(name, location):
 
     Path("willow/config").mkdir(exist_ok=True,parents=True)
 
+    Path("willow/build-docs").mkdir(exist_ok=True,parents=True)
+
     Path("source/branches/main/dependencies").mkdir(exist_ok=True,parents=True)
+
+    Path("willow/build-requirements/").mkdir(exist_ok=True,parents=True)
 
     with open(f"source/branches/main/main.py", mode="w") as f:
         f.write("# Welcome! You can start writing some code here! To add dependencies run 'willow --dependency https://github.com/example/example! --location project-path'. For further documentation please read the wiki on github!")
@@ -174,6 +181,8 @@ def add_dependency(url, location, depname):
             dir_list = os.listdir(f"{location}/source/branches/main/dependencies/")
             for directory in dir_list:
                 if directory.startswith(f"{depname}-"):
+                    os.system(f"pip3 install -r {location}/source/branches/main/dependencies/{directory}/requirements.txt")
+                    
                     os.system(f"pip3 install {location}/source/branches/main/dependencies/{directory}")
 
                     SUCCESS("Done... Removing temporary files...")
@@ -190,5 +199,36 @@ def add_dependency(url, location, depname):
         ERROR("Invaid/corrupt project. Try checking the location again.")
 
 def getversion():
-    version = "Version: 1.0.0"
+    version = "Version: 1.1.0"
     return version
+
+def scan(location):
+    root_dir = location+"/source/branches/main/"
+
+    required_modules = set()
+
+    for dirpath, dirnames, filenames in os.walk(root_dir):
+        for filename in filenames:
+            if filename.endswith(".py"):
+                file_path = os.path.join(dirpath, filename)
+                with open(file_path, "r") as f:
+                    try:
+                        module_ast = ast.parse(f.read())
+                        for node in module_ast.body:
+                            if isinstance(node, ast.Import):
+                                for alias in node.names:
+                                    SUCCESS(f"Added: {alias.name}")
+                                    required_modules.add(alias.name)
+                            elif isinstance(node, ast.ImportFrom):
+                                required_modules.add(node.module)
+                    except SyntaxError:
+                        ERROR(f"Syntax Errors in file: {filename}, skipping")
+
+                        pass
+
+    with open(f"{location}/willow/build-requirements/requirements.txt", "w") as f:
+        
+        f.write("\n".join(sorted(module for module in required_modules if module is not None)))
+
+        SUCCESS("Scan finished. go to /willow/build-requirements/")
+

@@ -22,6 +22,9 @@ parser.add_argument('--add', metavar='adddep', type=str,
 parser.add_argument('--depname', metavar='depname', type=str,
                     help='name of the dependency to be added to a project')
 
+parser.add_argument('--scan', metavar='scan', type=str,
+                    help='Name of the project to scan')
+
 parser.add_argument('--version', nargs="?", const=True,
                     help='Willow Version')
 
@@ -46,3 +49,6 @@ if args.add and args.location and args.depname:
 
 if args.version:
     print(willowapi.getversion())
+
+if args.scan:
+    willowapi.scan(args.scan)
