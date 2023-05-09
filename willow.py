@@ -25,8 +25,18 @@ parser.add_argument('--depname', metavar='depname', type=str,
 parser.add_argument('--scan', metavar='scan', type=str,
                     help='Name of the project to scan')
 
+parser.add_argument('--run', metavar='scan', type=str,
+                    help='Name of the project to run')
+
 parser.add_argument('--version', nargs="?", const=True,
                     help='Willow Version')
+
+parser.add_argument('--fix', metavar='scan', type=str,
+                    help='Name of the project to fix')
+
+parser.add_argument('--backup', metavar='scan', type=str,
+                    help='Name of the project to backup')
+
 
 args = parser.parse_args()
 
@@ -48,7 +58,16 @@ if args.add and args.location and args.depname:
     willowapi.add_dependency(args.add, args.location, args.depname)
 
 if args.version:
-    print(willowapi.getversion())
+    print(willowapi.version())
 
 if args.scan:
     willowapi.scan(args.scan)
+
+if args.run:
+    willowapi.run(args.run)
+
+if args.fix:
+    willowapi.fix(args.fix)
+
+if args.backup:
+    willowapi.backup(args.backup)

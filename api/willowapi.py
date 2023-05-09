@@ -1,5 +1,7 @@
 # Imports
 
+import subprocess
+
 from termcolor import colored
 
 from colorama import init
@@ -96,6 +98,8 @@ def create(name, location):
     Path("source/branches/main/dependencies").mkdir(exist_ok=True,parents=True)
 
     Path("willow/build-requirements/").mkdir(exist_ok=True,parents=True)
+
+    Path("willow/test/").mkdir(exist_ok=True,parents=True)
 
     with open(f"source/branches/main/main.py", mode="w") as f:
         f.write("# Welcome! You can start writing some code here! To add dependencies run 'willow --dependency https://github.com/example/example! --location project-path'. For further documentation please read the wiki on github!")
@@ -198,8 +202,13 @@ def add_dependency(url, location, depname):
     else:
         ERROR("Invaid/corrupt project. Try checking the location again.")
 
+@DeprecationWarning
 def getversion():
-    version = "Version: 1.1.0"
+    version = "Version: 1.2.0"
+    return version
+
+def version():
+    version = "1.2.0"
     return version
 
 def scan(location):
@@ -232,3 +241,46 @@ def scan(location):
 
         SUCCESS("Scan finished. go to /willow/build-requirements/")
 
+
+def run(location):
+    INFO("Building...")
+
+    os.system("pip3 install pyinstaller")
+    
+    os.system(f"pyinstaller --onefile --distpath {location}/willow/test {location}/source/branches/main/main.py")
+    
+    os.system(f"chmod +x {location}/willow/test/main")
+
+    SUCCESS("Starting...")
+
+    subprocess.Popen(f"{location}/willow/test/main")
+
+def fix(location):
+    os.chdir(location)
+
+    Path("willow/builds").mkdir(exist_ok=True,parents=True)
+
+    Path("willow/config").mkdir(exist_ok=True,parents=True)
+
+    Path("willow/build-docs").mkdir(exist_ok=True,parents=True)
+
+    Path("source/branches/main/dependencies").mkdir(exist_ok=True,parents=True)
+
+    Path("willow/build-requirements/").mkdir(exist_ok=True,parents=True)
+
+    Path("willow/test/").mkdir(exist_ok=True,parents=True)
+
+    SUCCESS("Fixed basic project structure...")
+
+def backup(location):
+    INFO("Backing up...")
+
+    current_time = datetime.datetime.now()
+
+    formatted_time = current_time.strftime('%Y-%m-%d_%H-%M-%S')
+
+    filename = f"{formatted_time}"
+
+    shutil.make_archive(filename,root_dir=location, format="zip")
+
+    return SUCCESS(f"Done... saved to {filename}.zip")
