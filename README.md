@@ -1,7 +1,7 @@
 # Willow
 
 Willow
-Willow is a Python build system that can be used to create, compile, delete, and add dependencies to projects. It is a command-line tool that can be used to automate various tasks related to building and managing software projects.
+Willow is a Python build system that can be used to create, compile, delete, scan projects, and add dependencies to projects. It is a command-line tool that can be used to automate various tasks related to building and managing software projects.
 
 # Usage
 To use Willow, you can run the script with various command-line arguments:
