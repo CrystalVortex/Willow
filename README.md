@@ -55,6 +55,7 @@ Back up a project, use the --backup flag:
 willow --backup project-name
 This will create a folder in the root directory of willow with a backup including the time and date.
 
+
 # API
 Willow also provides an API that can be used to perform the same tasks programmatically. The willowapi module provides the following functions:
 
@@ -69,3 +70,6 @@ Willow is a powerful tool for building and managing software projects in Python.
 
 # Building
 ### Check the wiki for building willow
+
+# Project
+Make sure to star it if you like it ⭐️
