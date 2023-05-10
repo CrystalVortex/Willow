@@ -58,12 +58,12 @@ This will create a folder in the root directory of willow with a backup includin
 # API
 Willow also provides an API that can be used to perform the same tasks programmatically. The willowapi module provides the following functions:
 
-create(name, location): creates a new project with the specified name at the specified location.
-compile(directory): compiles the project located at the specified directory.
-delete(directory): deletes the project located at the specified directory.
-add_dependency(project_dir, dep_dir, depname): adds the specified dependency to the project located at project_dir.
-version(): returns the current version of Willow.
-scan(directory): scans a project and search for dependencies to create a requirements.txt.
+create(name, location): creates a new project with the specified name at the specified location. </br>
+compile(directory): compiles the project located at the specified directory. </br>
+delete(directory): deletes the project located at the specified directory. </br>
+add_dependency(project_dir, dep_dir, depname): adds the specified dependency to the project located at project_dir. </br>
+version(): returns the current version of Willow. </br>
+scan(directory): scans a project and search for dependencies to create a requirements.txt. </br>
 
 Conclusion
 Willow is a powerful tool for building and managing software projects in Python. It provides a simple command-line interface as well as a powerful API for performing tasks programmatically. If you're looking for a reliable and flexible build system for your Python projects, Willow is definitely worth checking out.
