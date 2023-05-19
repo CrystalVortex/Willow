@@ -119,6 +119,15 @@ def compile(location):
 
         INFO("Starting...")
 
+        if os.path.exists(f"{location}/willow/config/buildfile"):
+            SUCCESS("Found a build file...skipping normal compilation")
+            buildfile = open(f"{location}/willow/config/buildfile",mode="r")
+            os.system(" ".join(buildfile.readlines()))
+            exit()
+        else:
+            WARNING("No build file found, using normal packaging.")
+
+
         BUILD = random.randint(1,10000)
 
         os.mkdir(f"{location}/willow/builds/{BUILD}")
@@ -204,11 +213,10 @@ def add_dependency(url, location, depname):
 
 @DeprecationWarning
 def getversion():
-    version = "Version: 1.2.0"
-    return version
+    return DeprecationWarning
 
 def version():
-    version = "1.2.0"
+    version = "1.2.1"
     return version
 
 def scan(location):
