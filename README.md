@@ -57,7 +57,7 @@ This will create a folder in the root directory of willow with a backup includin
 
 
 # API
-Willow also provides an API that can be used to perform the same tasks programmatically. The willowapi module provides the following functions:
+Willow also provides an API that can be used to perform the same tasks programmatically. These are some of the Willow-api functions:
 
 create(name, location): creates a new project with the specified name at the specified location. </br>
 compile(directory): compiles the project located at the specified directory. </br>
